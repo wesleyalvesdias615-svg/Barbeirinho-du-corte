@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbeirinho do Corte | Barbearia em Imperatriz - MA</title>
+<meta name="description" content="Barbeirinho do Corte — barbearia em Vila Lobão, Imperatriz-MA. Cortes, barba, bigode e pigmentação. Agende pelo WhatsApp em segundos.">
+<meta property="og:title" content="Barbeirinho do Corte">
+<meta property="og:description" content="O verdadeiro corte brasileiro. Agende agora pelo WhatsApp.">
+<meta property="og:type" content="business.business">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde: #2F5233;
+    --verde-escuro: #1D3620;
+    --dourado: #C6A15B;
+    --dourado-claro: #E4C98A;
+    --fundo: #15120D;
+    --painel: #1E1912;
+    --painel-alt: #241E15;
+    --creme: #F3ECDD;
+    --creme-fosco: #C9C0AC;
+    --vinho: #7E2A2A;
+    --linha: rgba(198,161,91,0.22);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--fundo);
+    color:var(--creme);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--creme);
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- Emblema (recriação do logo em SVG) ---------- */
+  .emblema{
+    width:96px;
+    height:96px;
+    flex-shrink:0;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(21,18,13,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--linha);
+  }
+  header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:14px;
+    padding-bottom:14px;
+  }
+  .marca{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .marca .emblema{width:40px; height:40px;}
+  .marca-texto{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    font-weight:600;
+    line-height:1.1;
+  }
+  .marca-texto span{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-size:0.66rem;
+    color:var(--dourado);
+    font-weight:600;
+    margin-top:2px;
+  }
+  nav{display:flex; gap:28px;}
+  nav a{
+    font-size:0.92rem;
+    color:var(--creme-fosco);
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--dourado-claro);}
+  .btn-whats-header{
+    background:var(--verde);
+    color:var(--creme);
+    padding:10px 18px;
+    border-radius:3px;
+    font-size:0.88rem;
+    font-weight:600;
+    border:1px solid var(--dourado);
+    transition:background .2s, transform .2s;
+    white-space:nowrap;
+  }
+  .btn-whats-header:hover{background:var(--verde-escuro); transform:translateY(-1px);}
+  .nav-mobile-toggle{display:none;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:90px 0 100px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(47,82,51,0.35), transparent 60%),
+      var(--fundo);
+    border-bottom:1px solid var(--linha);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, transparent, transparent 58px, rgba(198,161,91,0.035) 58px, rgba(198,161,91,0.035) 60px);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--dourado);
+    font-size:0.82rem;
+    font-weight:600;
+    margin-bottom:22px;
+    opacity:0;
+    animation:subir .7s ease forwards;
+  }
+  .hero-eyebrow .traco{width:28px; height:1px; background:var(--dourado);}
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+    line-height:1.06;
+    max-width:11ch;
+    opacity:0;
+    animation:subir .7s ease .1s forwards;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--dourado-claro);
+  }
+  .hero p.lead{
+    margin-top:22px;
+    max-width:44ch;
+    font-size:1.08rem;
+    color:var(--creme-fosco);
+    opacity:0;
+    animation:subir .7s ease .2s forwards;
+  }
+  .hero-ctas{
+    margin-top:34px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:subir .7s ease .3s forwards;
+  }
+  .btn-primario{
+    background:var(--verde);
+    color:var(--creme);
+    padding:15px 26px;
+    border-radius:3px;
+    font-weight:600;
+    font-size:0.98rem;
+    border:1px solid var(--dourado);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:background .2s, transform .2s;
+  }
+  .btn-primario:hover{background:var(--verde-escuro); transform:translateY(-2px);}
+  .btn-secundario{
+    padding:15px 22px;
+    font-size:0.98rem;
+    color:var(--creme-fosco);
+    border:1px solid var(--linha);
+    border-radius:3px;
+    transition:border-color .2s, color .2s;
+  }
+  .btn-secundario:hover{border-color:var(--dourado); color:var(--creme);}
+  .hero-selo{
+    margin-top:40px;
+    display:flex;
+    gap:26px;
+    color:var(--creme-fosco);
+    font-size:0.84rem;
+    opacity:0;
+    animation:subir .7s ease .4s forwards;
+  }
+  .hero-selo strong{color:var(--dourado-claro); display:block; font-family:'Fraunces',serif; font-size:1.3rem;}
+
+  .hero-emblema-wrap{
+    display:flex;
+    justify-content:center;
+    opacity:0;
+    animation:girar 1s ease .2s forwards;
+  }
+  .hero-emblema-wrap .emblema{width:min(320px, 80vw); height:auto;}
+
+  @keyframes subir{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+  @keyframes girar{from{opacity:0; transform:scale(.9) rotate(-6deg);} to{opacity:1; transform:scale(1) rotate(0);}}
+
+  /* ---------- Seções genéricas ---------- */
+  section{padding:88px 0;}
+  .titulo-secao{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:14px;
+  }
+  .titulo-secao .num{
+    font-family:'Fraunces', serif;
+    font-size:1rem;
+    color:var(--dourado);
+  }
+  .titulo-secao h2{font-size:clamp(1.7rem, 3vw, 2.3rem);}
+
+  /* ---------- Sobre ---------- */
+  .sobre{border-bottom:1px solid var(--linha);}
+  .sobre-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .sobre p{
+    color:var(--creme-fosco);
+    font-size:1.05rem;
+    max-width:52ch;
+  }
+  .sobre-cartao{
+    background:var(--painel);
+    border:1px solid var(--linha);
+    border-radius:4px;
+    padding:28px;
+  }
+  .sobre-cartao p{
+    font-style:italic;
+    font-family:'Fraunces', serif;
+    font-size:1.2rem;
+    color:var(--creme);
+    line-height:1.5;
+  }
+  .sobre-cartao .fonte{
+    margin-top:14px;
+    font-style:normal;
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    color:var(--dourado);
+  }
+
+  /* ---------- Serviços ---------- */
+  .servicos{background:var(--painel);}
+  .servicos-lista{
+    margin-top:34px;
+    border-top:1px solid var(--linha);
+  }
+  .servico-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    padding:20px 4px;
+    border-bottom:1px solid var(--linha);
+    transition:background .2s;
+  }
+  .servico-item:hover{background:rgba(198,161,91,0.05);}
+  .servico-nome{
+    font-family:'Fraunces', serif;
+    font-size:1.12rem;
+  }
+  .servico-tempo{
+    font-size:0.85rem;
+    color:var(--creme-fosco);
+    margin-top:4px;
+  }
+  .servico-cta{
+    font-size:0.82rem;
+    color:var(--dourado);
+    white-space:nowrap;
+    opacity:0;
+    transform:translateX(-6px);
+    transition:opacity .2s, transform .2s;
+  }
+  .servico-item:hover .servico-cta{opacity:1; transform:translateX(0);}
+  .servicos-nota{
+    margin-top:26px;
+    font-size:0.9rem;
+    color:var(--creme-fosco);
+  }
+
+  /* ---------- Horários + Localização ---------- */
+  .info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--linha);
+    border:1px solid var(--linha);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .info-bloco{
+    background:var(--fundo);
+    padding:34px;
+  }
+  .info-bloco h3{
+    font-size:1.2rem;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .horario-linha{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    font-size:0.94rem;
+    color:var(--creme-fosco);
+    border-bottom:1px dashed var(--linha);
+  }
+  .horario-linha.fechado{color:var(--vinho); font-weight:600;}
+  .info-bloco address{
+    font-style:normal;
+    color:var(--creme-fosco);
+    font-size:0.98rem;
+    line-height:1.7;
+  }
+  .info-bloco .link-mapa{
+    display:inline-block;
+    margin-top:16px;
+    color:var(--dourado);
+    font-size:0.9rem;
+    border-bottom:1px solid var(--dourado);
+    padding-bottom:2px;
+  }
+
+  /* ---------- CTA final ---------- */
+  .cta-final{
+    text-align:center;
+    background:
+      radial-gradient(ellipse 700px 400px at 50% 0%, rgba(47,82,51,0.4), transparent 65%),
+      var(--painel-alt);
+    border-top:1px solid var(--linha);
+    border-bottom:1px solid var(--linha);
+  }
+  .cta-final h2{
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    max-width:16ch;
+    margin:0 auto 18px;
+  }
+  .cta-final p{
+    color:var(--creme-fosco);
+    max-width:42ch;
+    margin:0 auto 30px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{padding:52px 0 34px;}
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:32px;
+    padding-bottom:28px;
+    border-bottom:1px solid var(--linha);
+  }
+  .footer-marca{display:flex; align-items:center; gap:12px;}
+  .footer-marca .emblema{width:36px; height:36px;}
+  .footer-contato p{color:var(--creme-fosco); font-size:0.92rem; margin-top:6px;}
+  .footer-baixo{
+    padding-top:22px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:0.8rem;
+    color:var(--creme-fosco);
+  }
+
+  /* ---------- Botão flutuante ---------- */
+  .flutuante{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:60;
+    background:var(--verde);
+    color:var(--creme);
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--dourado);
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    transform:scale(0);
+    transition:transform .3s ease;
+  }
+  .flutuante.mostrar{transform:scale(1);}
+  .flutuante svg{width:26px; height:26px;}
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width:860px){
+    nav{display:none;}
+    .hero-grid{grid-template-columns:1fr; text-align:left;}
+    .hero-emblema-wrap{order:-1; margin-bottom:8px;}
+    .hero-emblema-wrap .emblema{width:180px;}
+    .sobre-grid{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    .footer-grid{flex-direction:column;}
+  }
+  @media (max-width:480px){
+    section{padding:64px 0;}
+    .hero{padding:56px 0 70px;}
+    .hero-selo{gap:18px; flex-wrap:wrap;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  :focus-visible{outline:2px solid var(--dourado-claro); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="marca">
+      <svg class="emblema" viewBox="0 0 100 100" role="img" aria-label="Emblema Barbeirinho do Corte">
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#C6A15B" stroke-width="2"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#2F5233" stroke-width="6"/>
+        <path d="M32 62 L68 38 M32 38 L68 62" stroke="#F3ECDD" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="6" fill="#C6A15B"/>
+      </svg>
+      <div class="marca-texto">Barbeirinho do Corte<span>BARBEARIA · IMPERATRIZ-MA</span></div>
+    </div>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#local">Endereço</a>
+    </nav>
+    <a class="btn-whats-header" id="btnHeader" href="#" target="_blank" rel="noopener">Agendar no WhatsApp</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow"><span class="traco"></span>O verdadeiro corte brasileiro</div>
+        <h1>Seu visual no <em>capricho</em>, sem sair de Vila Lobão</h1>
+        <p class="lead">Cortes, barba e acabamento com a precisão de quem entende do ofício. Escolha o serviço, chame no WhatsApp e garanta seu horário.</p>
+        <div class="hero-ctas">
+          <a class="btn-primario" id="btnHeroPrincipal" href="#" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.4 1.2-2 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.7.8c.2.1.4.2.5.3.1.2.1.9-.1 1.5Z"/></svg>
+            Chamar no WhatsApp
+          </a>
+          <a class="btn-secundario" href="#servicos">Ver serviços</a>
+        </div>
+        <div class="hero-selo">
+          <div><strong>11+</strong>serviços no cardápio</div>
+          <div><strong>2025</strong>na Vila Lobão</div>
+          <div><strong>5min</strong>resposta no WhatsApp</div>
+        </div>
+      </div>
+      <div class="hero-emblema-wrap">
+        <svg class="emblema" viewBox="0 0 200 220" role="img" aria-label="Emblema ilustrativo da barbearia">
+          <path d="M100 6 L188 44 V128 C188 172 148 202 100 214 C52 202 12 172 12 128 V44 Z" fill="#1E1912" stroke="#C6A15B" stroke-width="3"/>
+          <path d="M100 20 L174 52 V126 C174 164 140 190 100 200 C60 190 26 164 26 126 V52 Z" fill="none" stroke="#2F5233" stroke-width="5"/>
+          <text x="100" y="72" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="17" fill="#F3ECDD">BARBEIRINHO</text>
+          <text x="100" y="94" text-anchor="middle" font-family="Fraunces, serif" font-weight="600" font-size="15" fill="#C6A15B" letter-spacing="2">DO CORTE</text>
+          <line x1="52" y1="105" x2="148" y2="105" stroke="#C6A15B" stroke-width="1.5"/>
+          <path d="M60 150 L140 130 M60 130 L140 150" stroke="#F3ECDD" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="100" cy="140" r="8" fill="#8B2E2E" stroke="#C6A15B" stroke-width="2"/>
+          <text x="100" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#C9C0AC" letter-spacing="1.5">IMPERATRIZ · MA</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="sobre" id="sobre">
+    <div class="wrap sobre-grid">
+      <div>
+        <div class="titulo-secao"><span class="num">01</span><h2>Sobre a barbearia</h2></div>
+        <p>Na Vila Lobão, o Barbeirinho do Corte é o endereço de quem não abre mão de um corte bem-feito. Cada atendimento é pensado para elevar sua autoestima — do degradê ao acabamento na navalha.</p>
+      </div>
+      <div class="sobre-cartao">
+        <p>&ldquo;Nossa barbearia é especializada em elevar sua autoestima com nossos diversos cortes de cabelo e barba que temos pra lhes oferecer.&rdquo;</p>
+        <div class="fonte">— Barbeirinho do Corte</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="servicos" id="servicos">
+    <div class="wrap">
+      <div class="titulo-secao"><span class="num">02</span><h2>Serviços &amp; tempos</h2></div>
+      <p style="color:var(--creme-fosco); max-width:48ch;">Escolha o que precisa hoje. O tempo estimado ajuda a organizar sua saída — chegue com folga.</p>
+
+      <div class="servicos-lista" id="listaServicos"></div>
+      <p class="servicos-nota">Valores sob consulta — confirme o preço do combo escolhido direto pelo WhatsApp.</p>
+    </div>
+  </section>
+
+  <section id="local">
+    <div class="wrap">
+      <div class="titulo-secao"><span class="num">03</span><h2>Horário &amp; endereço</h2></div>
+      <div class="info-grid">
+        <div class="info-bloco">
+          <h3>Funcionamento</h3>
+          <div class="horario-linha"><span>Segunda a sábado</span><span>Consulte pelo WhatsApp</span></div>
+          <div class="horario-linha fechado"><span>Domingo</span><span>Fechado</span></div>
+        </div>
+        <div class="info-bloco">
+          <h3>Onde estamos</h3>
+          <address>
+            R. Frei Dário, 582 — Vila Lobão<br>
+            Imperatriz - MA, 65910-080<br>
+            Brasil
+          </address>
+          <a class="link-mapa" href="https://www.google.com/maps/search/?api=1&query=R.+Frei+D%C3%A1rio%2C+582+Vila+Lob%C3%A3o+Imperatriz+MA" target="_blank" rel="noopener">Ver no mapa →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Bora marcar aquele corte?</h2>
+      <p>Sem enrolação: manda uma mensagem, escolhe o serviço e garante seu horário na Vila Lobão.</p>
+      <a class="btn-primario" id="btnCtaFinal" href="#" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.4 1.2-2 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.7.8c.2.1.4.2.5.3.1.2.1.9-.1 1.5Z"/></svg>
+        Falar agora no WhatsApp
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-marca">
+        <svg class="emblema" viewBox="0 0 100 100" role="img" aria-hidden="true">
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#C6A15B" stroke-width="2"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#2F5233" stroke-width="6"/>
+          <path d="M32 62 L68 38 M32 38 L68 62" stroke="#F3ECDD" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="6" fill="#C6A15B"/>
+        </svg>
+        <div class="marca-texto">Barbeirinho do Corte</div>
+      </div>
+      <div class="footer-contato">
+        <div class="marca-texto" style="font-size:0.85rem; color:var(--dourado);">Contato</div>
+        <p>+55 99 91229-569</p>
+        <p>R. Frei Dário, 582 — Vila Lobão, Imperatriz-MA</p>
+      </div>
+    </div>
+    <div class="footer-baixo">
+      <span>© <span id="ano"></span> Barbeirinho do Corte. Todos os direitos reservados.</span>
+      <span>Feito com cuidado para quem preza pelo corte certo.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="flutuante" id="btnFlutuante" href="#" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.4 1.2-2 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.7.8c.2.1.4.2.5.3.1.2.1.9-.1 1.5Z"/></svg>
+</a>
+
+<script>
+  // ---------- Dados ----------
+  const TELEFONE = "5599991229569"; // +55 99 91229-569
+  const MENSAGEM_PADRAO = "Olá! Vi o site e quero agendar um horário na Barbeirinho do Corte.";
+
+  const SERVICOS = [
+    { nome:"Corte Social", tempo:"30 min" },
+    { nome:"Corte Degradê", tempo:"30 min" },
+    { nome:"Barba", tempo:"20 min" },
+    { nome:"Bigode", tempo:"05 min" },
+    { nome:"Sobrancelha", tempo:"05 min" },
+    { nome:"Cabelo + Barba", tempo:"50 min" },
+    { nome:"Cabelo + Sobrancelha", tempo:"35 min" },
+    { nome:"Cabelo + Bigode", tempo:"35 min" },
+    { nome:"Cabelo + Barba + Sobrancelha", tempo:"55 min" },
+    { nome:"Cabelo + Sobrancelha + Bigode", tempo:"40 min" },
+    { nome:"Cabelo + Cavanhaque", tempo:"40 min" },
+    { nome:"Pigmentação completa", tempo:"1h" },
+  ];
+
+  function linkWhats(mensagem){
+    return `https://wa.me/${TELEFONE}?text=${encodeURIComponent(mensagem)}`;
+  }
+
+  // Preenche os links de WhatsApp fixos
+  document.getElementById('btnHeader').href = linkWhats(MENSAGEM_PADRAO);
+  document.getElementById('btnHeroPrincipal').href = linkWhats(MENSAGEM_PADRAO);
+  document.getElementById('btnCtaFinal').href = linkWhats(MENSAGEM_PADRAO);
+  document.getElementById('btnFlutuante').href = linkWhats(MENSAGEM_PADRAO);
+
+  // Monta a lista de serviços dinamicamente, cada um com CTA próprio
+  const lista = document.getElementById('listaServicos');
+  SERVICOS.forEach(s => {
+    const item = document.createElement('a');
+    item.className = 'servico-item';
+    item.href = linkWhats(`Olá! Quero agendar: ${s.nome}.`);
+    item.target = '_blank';
+    item.rel = 'noopener';
+    item.innerHTML = `
+      <div>
+        <div class="servico-nome">${s.nome}</div>
+        <div class="servico-tempo">${s.tempo}</div>
+      </div>
+      <span class="servico-cta">Agendar →</span>
+    `;
+    lista.appendChild(item);
+  });
+
+  // Botão flutuante aparece depois de rolar a hero
+  const flutuante = document.getElementById('btnFlutuante');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 420){ flutuante.classList.add('mostrar'); }
+    else{ flutuante.classList.remove('mostrar'); }
+  }, { passive:true });
+
+  document.getElementById('ano').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
